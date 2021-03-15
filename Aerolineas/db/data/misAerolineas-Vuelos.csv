@@ -1,0 +1,4 @@
+ciudadDeOrigen,fechaSalida,horaDeSalida,ciudadDestino,fechaLlegada,horaDeLlegada,valor,nombre,asientosDisponibles,status,paisDeOrigen_code,paisDeDestino_code,moneda_code
+CABA,2020-12-31,23:59:59,Tokio,2020-12-31,23:59:59,20000,Bs As to Tokio,23,2,ARG,JAP,$
+CABA,2020-12-31,23:59:59,Tokio,2020-12-31,23:59:59,200,Bs As to Tokio,23,2,ARG,JAP,$
+CABA,2020-12-31,23:59:59,Tokio,2020-12-31,23:59:59,200,Bs As to Tokio,23,2,GER,JAP,$
