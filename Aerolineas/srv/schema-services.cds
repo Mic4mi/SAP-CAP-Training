@@ -43,6 +43,7 @@ service api {
             nombre         as nombreAerolinea,
             aviones.modelo as nombreAvion,
             vuelos.nombre  as nombreVuelo,
+            equipaje.nombre as nombreEquipaje
         };
 
     entity mayoresDe30             as
