@@ -29,6 +29,29 @@ entity Productos : cuid, Precio {
     name    : String(111);
     tiendas : Association to many Tiendas_Productos
                   on tiendas.productos = $self;
+    marca   : Association to Marcas;
+    subtipo : Association to one Subtipos
+                  on subtipo.producto = $self;
+}
+
+entity Marcas : cuid {
+    nombre    : String(50);
+    pais      : String(50);
+    productos : Association to many Productos
+                    on productos.marca = $self;
+}
+
+entity Tipos : cuid {
+    nombre   : String(111);
+    subtipos : Association to many Subtipos
+                   on subtipos.tipo = $self;
+
+}
+
+entity Subtipos : cuid {
+    nombre   : String(111);
+    tipo     : Association to Tipos;
+    producto : Association to Productos;
 }
 
 entity Duenos_Tiendas : cuid {
