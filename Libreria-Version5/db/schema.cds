@@ -8,37 +8,45 @@ using {
 
 namespace miLibreria;
 
+type correoElectronico : {
+    name   : String(20);
+    domain : String(111);
+}
+
+
 type Nombre : String(50);
 type Apellido : String(50);
 type Fecha : Date;
 
-aspect datosDeUsuario {
-    username : String(111);
-    password : String(8);
-}
-
 aspect NombreEntidad {
-    @mandatory nombre : Nombre;
+    nombre : Nombre;
 }
 
 entity Libros : cuid, NombreEntidad {
     fechaDePublicacion : Fecha;
-    @mandatory puntaje : Integer;
+    puntaje            : Integer;
     criticas           : array of {
         critico        : Nombre;
         critica        : String(300);
-    }
+    };
+    editorial          : Association to Editoriales;
+    autor              : Association to Autores;
+    clientes           : Association to Clientes;
 }
 
 entity Clientes : cuid, NombreEntidad {
-    @mandatory fechaNacimiento : Fecha;
-    @mandatory dni             : Integer; //No mostrar en el servicio
-    usuario                    : Composition of one Usuarios
-                                     on usuario.parent = $self;
+    fechaNacimiento : Fecha;
+    dni             : Integer; //No mostrar en el servicio
+    usuario         : Composition of one Usuarios
+                          on usuario.parent = $self;
+    librosComprados : Association to many Libros
+                          on librosComprados.clientes = $self;
 }
 
-entity Usuarios : cuid, datosDeUsuario {
+entity Usuarios : cuid {
     key parent     : Association to Clientes;
+        username   : String(111);
+        password   : String(8); // no mostrar
         email      : array of {
             user   : String(30);
             domain : String(30);
@@ -57,9 +65,16 @@ entity Autores : cuid, NombreEntidad {
     fechaNacimiento            : Fecha;
     nacionalidad               : String(50);
     cantidadDeLibrosPublicados : Integer;
-    ventaDirecta               : Boolean;
+    ventaDirecta               : Boolean; //no mostrar
+    editorial                  : Association to Editoriales;
+    libros                     : Association to many Libros
+                                     on libros.autor = $self;
 }
 
-entity Editorial : cuid, NombreEntidad {
+entity Editoriales : cuid, NombreEntidad {
     nacionalidad : String(50);
+    libros       : Association to many Libros
+                       on libros.editorial = $self;
+    autores      : Association to many Autores
+                       on autores.editorial = $self;
 }

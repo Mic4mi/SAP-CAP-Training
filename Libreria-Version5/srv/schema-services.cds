@@ -2,19 +2,30 @@ using {miLibreria as my} from '../db/schema';
 
 service api {
 
-    entity Libros    as projection on my.Libros;
-    entity Autores   as projection on my.Autores;
-    entity Editorial as projection on my.Editorial;
+    entity Libros      as projection on my.Libros;
+    entity Editoriales as projection on my.Editoriales;
 
-    //    entity Clientes  as projection on my.Clientes;
-    entity Clientes  as
+    entity Clientes    as
         select from my.Clientes {
+            *
+    };
+
+    entity Usuarios    as
+        select from my.Usuarios {
             *
         };
 
-    entity Usuarios  as
-        select from my.Usuarios {
+    entity Autores     as
+        select from my.Autores {
             *
+        };
+
+    entity resumen     as
+        select from Clientes {
+            librosComprados.nombre             as librosComprados,
+            librosComprados.autor.nombre       as autores,
+            librosComprados.autor.nacionalidad as nacionalidad_del_autor,
+            librosComprados.editorial.nombre   as editorial
         };
 
 }
