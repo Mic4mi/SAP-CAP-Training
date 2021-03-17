@@ -9,8 +9,7 @@ using {
 namespace miFutbol;
 
 type Fecha : Date;
-
-
+ 
 entity Partidos : cuid, managed {
     espectadores    : Integer;
     nombreArbitro   : String(60);
