@@ -11,14 +11,19 @@ namespace miFutbol;
 type Fecha : Date;
 
 
-entity Partidos : cuid {
-    espectadores  : Integer;
-    nombreArbitro : String(60);
-    nombreRelator : String(60);
-    fecha         : Fecha;
-    esClasico     : Boolean;
-    resultado     : Composition of one Resultados
-                        on resultado.parent = $self;
+entity Partidos : cuid, managed {
+    espectadores    : Integer;
+    nombreArbitro   : String(60);
+    nombreRelator   : String(60);
+    fecha           : Fecha;
+    esClasico       : Boolean;
+    resultado       : Composition of one Resultados
+                          on resultado.parent = $self;
+    equipoLocal     : Association to Equipos;
+    equipoVisitante : Association to Equipos;
+    puntajes        : Association to many Puntajes
+                          on puntajes.partido = $self;
+    estadio         : Association to Estadios;
 }
 
 entity Resultados : cuid {
@@ -35,6 +40,14 @@ entity Equipos : cuid {
     presupuesto          : Integer;
     jugadores            : Composition of many Jugadores
                                on jugadores.parent = $self;
+    local                : Association to many Partidos
+                               on local.equipoLocal = $self;
+    visitante            : Association to many Partidos
+                               on visitante.equipoVisitante = $self;
+    estadio              : Association to one Estadios
+                               on estadio.equipo = $self;
+    puntajes             : Association to many Puntajes
+                               on puntajes.equipo = $self;
 }
 
 entity Jugadores : cuid {
@@ -45,16 +58,24 @@ entity Jugadores : cuid {
         posicion     : String(50);
         paisDeOrigen : String(3);
         numero       : Integer;
+        puntaje      : Association to one Puntajes
+                           on puntaje.jugador = $self;
 }
 
 entity Estadios : cuid {
     nombre    : String(50);
     direccion : String(100);
     capacidad : Integer;
+    partidos  : Association to many Partidos
+                    on partidos.estadio = $self;
+    equipo    : Association to Equipos;
 }
 
 entity Puntajes : cuid {
     goles       : Integer;
     asistencias : Integer;
     salvadas    : Integer;
+    partido     : Association to Partidos;
+    jugador     : Association to Jugadores;
+    equipo      : Association to Equipos;
 }
