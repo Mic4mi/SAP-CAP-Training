@@ -19,7 +19,7 @@ service api {
             apodo                                        as apodo_del_jugador,
             parent.nombreEquipo                          as equipo_del_jugador,
             puntaje.partido.fecha                        as fecha_del_partido,
-            puntaje.partido.estadio                      as estadio,
+            puntaje.partido.estadio.nombre               as estadio,
             puntaje.partido.equipoLocal.nombreEquipo     as equipo_local,
             puntaje.partido.equipoVisitante.nombreEquipo as equipo_visitante
         }
