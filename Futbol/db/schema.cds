@@ -9,15 +9,14 @@ using {
 namespace miFutbol;
 
 type Fecha : Date;
- 
+
 entity Partidos : cuid, managed {
     espectadores    : Integer;
     nombreArbitro   : String(60);
     nombreRelator   : String(60);
     fecha           : Fecha;
     esClasico       : Boolean;
-    resultado       : Composition of one Resultados
-                          on resultado.parent = $self;
+    resultado       : Composition of one Resultados;
     equipoLocal     : Association to Equipos;
     equipoVisitante : Association to Equipos;
     puntajes        : Association to many Puntajes
@@ -57,7 +56,7 @@ entity Jugadores : cuid {
         posicion     : String(50);
         paisDeOrigen : String(3);
         numero       : Integer;
-        puntaje      : Association to one Puntajes
+        puntaje      : Association to many Puntajes
                            on puntaje.jugador = $self;
 }
 

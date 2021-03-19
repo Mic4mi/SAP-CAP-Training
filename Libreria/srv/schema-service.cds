@@ -2,6 +2,8 @@ using {miLibrary as my} from '../db/schema';
 
 service api {
 
+    entity AuxBook  as projection on my.AuxBook;
+
     entity Books    as
         select from my.Books {
             *,
@@ -15,6 +17,11 @@ service api {
 
     entity Editions as
         select from my.Editions {
+            *
+        };
+
+    entity Log      as
+        select from my.Log {
             *
         };
 }

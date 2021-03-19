@@ -78,4 +78,7 @@ service api {
         where
                 valor > 20
             and valor < 50;
+
+    //action modPrecio(producto : Productos : ID, precio : Integer) returns String;
+    action modificarPrecio(producto : Productos : ID, precio : Productos : valor) returns String;
 }

@@ -68,4 +68,39 @@ service api {
             resultado.resultadoVisitante as resultado_equipo_visitante
         };
 
+    /*
+    Traer a una vista el jugador con mayor promedio de gol
+     */
+
+    entity promedioDeGoles        as
+        select from Jugadores {
+            *,
+            avg(
+                puntaje.goles
+            ) as promedio_de_goles : Decimal(6, 3)
+        }
+        group by
+            ID,
+            nombre
+        order by
+            promedio_de_goles;
+
+    entity sumaDeGoles            as
+        select from Equipos {
+            *,
+            sum(
+                visitante.resultado.resultadoVisitante
+            ) as total_visitante : Integer,
+            sum(
+                local.resultado.resultadoLocal
+            ) as total_local     : Integer
+        };
+
+
+/*entity nose                   as
+    select from Partidos {
+        *,
+        resultado.resultadoLocal + resultado.resultadoVisitante as total : Integer
+    };*/
+
 }
