@@ -62,4 +62,7 @@ entity Duenos_Tiendas : cuid {
 entity Tiendas_Productos : cuid {
     key tienda    : Association to Tiendas;
     key productos : Association to Productos;
+        stock     : Integer;
+        maxStock  : Integer;
+        minStock  : Integer;
 }
