@@ -12,7 +12,7 @@ module.exports = cds.service.impl(async (srv) => {
 
     srv.on('controlDeStock', async (req) => {
 
-        console.log("Antes de modificar el stock xd!");
+        console.log("Antes de modificar el stock!");
 
         try {
             let mensaje = "Perfecto, el stock esta en buenas condiciones";
@@ -34,7 +34,7 @@ module.exports = cds.service.impl(async (srv) => {
                     mensaje = "Tienes pocos articulos, debes realizar un pedido pronto";
                 } else if (stockActualizable > maximo) {
                     mensaje = "Tienes demasiados articulos";
-                }
+                } 
 
                 await cds.run(UPDATE(Tiendas_Productos).with({ stock: { '+=': cantidad } }).where({ ID: producto_tienda_ID }));
 
