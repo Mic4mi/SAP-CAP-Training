@@ -27,7 +27,13 @@ entity Proyectos : cuid, managed {
     };
 }
 
+/*Pensamos que las tecnologias no tienen una relación explícita con
+uno o varios proyectos, tampoco que están 'contenidas' por los mismos,
+sino que los proyectos tienen o 'usan' varias tecnologías, de esta 
+manera, en este caso, las declaramos sin una relación pero un proyecto
+va a tener un array de tecnologias*/
+
 entity Tecnologias : cuid {
     nombre  : String(111);
-    salario : Decimal(7, 2);
+    salario : Decimal(7, 2); //per month, es mensual
 }
