@@ -5,38 +5,36 @@ const axios = require('axios');
 
 module.exports = cds.service.impl(async (srv) => {
 
-    srv.on('modificarStock', async (req) => {
-        try {
-            console.log("Antes de actualizar!");
-            const { productoID, stock } = req.data
-            const producto = await cds.run(SELECT.one.from(Productos).where({ ID: productoID }));
+    srv.before('CREATE', 'Order_Details', async (req) => {
+        const { producto_ID, orden_ID, cantidad } = req.data;
+        const producto = await cds.run(SELECT.one.from(Productos).where({ ID: producto_ID }));
+        if (producto) {
+            producto.unidadesEnUnaOrden += cantidad;
+            producto.unidadesEnStock -= cantidad;
 
-            if (producto) {
-                await cds.run(UPDATE(Productos).with({ unidadesEnStock: stock }).where({ ID: productoID }));
-                return "Se actualizó la cantidad correctamente";
+            if (producto.unidadesEnStock < 0) {
+
+                /* Si la Orden no tiene otras order_details, y no se puede generar una order_details por
+                falta de stock, deberia poder borrarse la orden en sí, pero no estaria funcionando.*/
+                try {
+                    let detalles = await cds.run(SELECT.from(Order_Details).where({ orden_ID: orden_ID }));
+                    if (detalles.lenght === 0) {
+                        await cds.run(DELETE.from(Ordenes).where({ ID: orden_ID })); // Esto no está andando. 
+                    }
+
+                } catch (err) {
+                    console.log("no se ha ejecutado el borado");
+                    console.log(err);
+                }
+
+                throw new Error("No se ha podido generar la orden porque no hay stock suficiente.");
             } else {
-                return "No se produjo el cambio porque no existe ese producto";
+                console.log("Esta todo bien")
             }
 
-        } catch (err) {
-            console.log("Ha ocurrido un error al intentar modificar la cantidad del producto");
-            console.log(err);
-            return "Algo salió mal";
+        } else {
+            console.log("no existe el producto");
         }
+
     });
-
-    /*    7*srv.on('POST', 'Ordenes', async (req) => {
-            
-            - El usuario puede cargar ordenes nuevas en la que tenga q especificar 
-            
-        });*/
-
-
 });
-
-
-
-
-
-
-

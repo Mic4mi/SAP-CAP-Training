@@ -1,5 +1,4 @@
 const cds = require('@sap/cds');
-
 const axios = require('axios');
 
 cds.on('served', async () => {
