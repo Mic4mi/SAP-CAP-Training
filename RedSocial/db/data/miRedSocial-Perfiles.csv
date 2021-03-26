@@ -1,5 +1,5 @@
-titulo,descripcion,categoria
-Hola mundo,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod,1
-Chau mundo,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod,0
-Que lindo es mi perfil,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod,3
-Me gustan los gatos,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod,4
+ID;titulo;descripcion;categoria
+300;Hola mundo;Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod;1
+301;Chau mundo;Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod;0
+302;Que lindo es mi perfil;Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod;3
+303;Me gustan los gatos;Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod;4

@@ -1,0 +1,61 @@
+## Generated mta.yaml based on template version 0.4.0
+## appName = Books-2
+## language=nodejs; multiTenant=false
+## approuter=
+_schema-version: '3.1'
+ID: Books-2
+version: 1.0.0
+description: "A simple CAP project."
+parameters:
+  enable-parallel-deployments: true
+   
+build-parameters:
+  before-all:
+   - builder: custom
+     commands:
+      - npm install --production
+      - npx -p @sap/cds-dk cds build --production
+
+modules:
+ # --------------------- SERVER MODULE ------------------------
+ - name: Books-2-srv
+ # ------------------------------------------------------------
+   type: nodejs
+   path: gen/srv
+   requires: 
+    # Resources extracted from CAP configuration
+    - name: Books-2-db
+    - name: xsuaa_autorization
+   provides:
+    - name: srv-api      # required by consumers of CAP services (e.g. approuter)
+      properties:
+        srv-url: ${default-url}
+
+ # -------------------- SIDECAR MODULE ------------------------
+ - name: Books-2-db-deployer
+ # ------------------------------------------------------------
+   type: com.sap.xs.hdi
+   path: gen/db  
+   parameters:
+     buildpack: nodejs_buildpack
+   requires:
+    # 'hana' and 'xsuaa' resources extracted from CAP configuration
+    - name: Books-2-db
+
+
+resources:
+ # services extracted from CAP configuration
+ # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
+# ------------------------------------------------------------
+ - name: Books-2-db
+# ------------------------------------------------------------
+   type: com.sap.xs.hdi-container
+   parameters:
+     service: hanatrial  # or 'hanatrial' on trial landscapes
+     service-plan: hdi-shared
+   properties:
+     hdi-service-name: ${service-name}
+ - name: xsuaa_autorization
+# ------------------------------------------------------------
+   type: org.cloudfoundry.existing-service
+

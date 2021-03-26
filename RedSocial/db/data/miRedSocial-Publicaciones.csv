@@ -1,4 +1,4 @@
-tituloPublicacion,cantidadDeVecesCompartido,tipo,vistaPrevia,likes
-Hoy esta lloviendo,150,2,true,50
-Me compre un chocolate,2,2,true,2
-Estoy muy enojado,4,1,false,50
+ID;tituloPublicacion;cantidadDeVecesCompartido;tipo;vistaPrevia;likes
+400;Hoy esta lloviendo;150;2;true;50
+401;Me compre un chocolate;2;2;true;2
+402;Estoy muy enojado;4;1;false;50

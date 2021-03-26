@@ -8,21 +8,18 @@ module.exports = cds.service.impl(async (srv) => {
 
         try {
             const { proyectoID } = req.data;
-            // Primero seleccionamos el proyecto que nos coincida con el ID recbido
+            
             let proyecto = await cds.run(SELECT.one.from(Proyectos).where({ ID: proyectoID }));
 
             if (proyecto) {
-                let total = 0; // determinamos una variable que acumule los costos
-                let mensaje; // esta variable la usaremos para emitir el informe de costo por proyecto y duración
+                let total = 0; 
+                let mensaje; 
                 
-                /* Para obtener la sumatoria de los salarios por x tecnologia, nos tenemos que traer
-                aquellas tecnologias que coincidan con las tecnologias que estan dentro del array 
-                de tecnologias del proyecto*/
                 let tecnologias = await cds.run(SELECT.from(Tecnologias).where({ ID: proyecto.tecnologias }));
                 for (let tecnologia of tecnologias) {
                     total += tecnologia.salario;
                 }
-                /*Segun la dificultad del proyecto, calculemos el costo por tiempo para la estimación*/
+                
                 switch (proyecto.dificultad) {
                     case 1:
                         total *= 1;

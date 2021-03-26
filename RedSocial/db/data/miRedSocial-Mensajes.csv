@@ -1,5 +1,5 @@
-nombreRemitente,contenido,leido
-pepsiMan,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod,true
-Lala234,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod,false
-Esteban75,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod,false
-wiii1234,Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod,true
+ID;nombreRemitente;contenido;leido
+200;pepsiMan;Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod;true
+201;Lala234;Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod;false
+202;Esteban75;Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod;false
+203;wiii1234;Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod;true

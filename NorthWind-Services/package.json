@@ -1,5 +1,5 @@
 {
-  "name": "Books",
+  "name": "NorthWind-Services",
   "version": "1.0.0",
   "description": "A simple CAP project.",
   "repository": "<Add your repository here>",
@@ -7,28 +7,14 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^4",
-    "@sap/hana-client": "^2.6.61",
+    "axios": "^0.21.1",
     "express": "^4",
-    "mbt": "^1.1.1"
+    "https": "^1.0.0"
   },
   "devDependencies": {
     "sqlite3": "^5.0.2"
   },
   "scripts": {
     "start": "cds run"
-  },
-  "cds": {
-    "requires": {
-      "db": {
-        "kind": "hana",
-        "model": [
-          "db",
-          "srv"
-        ]
-      }
-    },
-    "odata": {
-      "version": "v4"
-    }
   }
 }

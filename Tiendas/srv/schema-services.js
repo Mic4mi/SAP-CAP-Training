@@ -17,12 +17,12 @@ module.exports = cds.service.impl(async (srv) => {
         try {
             let mensaje = "Perfecto, el stock esta en buenas condiciones";
             const { producto_tienda_ID, cantidad } = req.data;
-            let tiendasProductos = await cds.run(SELECT.from(Tiendas_Productos).where({ ID: producto_tienda_ID }));
+            let tiendasProductos = await cds.run(SELECT.one.from(Tiendas_Productos).where({ ID: producto_tienda_ID }));
 
-            if (tiendasProductos.length > 0) {
-                let minimo = tiendasProductos[0].minStock;
-                let maximo = tiendasProductos[0].maxStock;
-                let stock = tiendasProductos[0].stock;
+            if (tiendasProductos) {
+                let minimo = tiendasProductos.minStock;
+                let maximo = tiendasProductos.maxStock;
+                let stock = tiendasProductos.stock;
                 let stockActualizable = stock + cantidad;
 
                 if (stockActualizable < 0) {
@@ -60,13 +60,20 @@ module.exports = cds.service.impl(async (srv) => {
         try {
             const duenoID = req.data.ID;
             const { Tiendas } = req._.req.query;
+            let duenos_tiendas_ids = [];
+
             if (Tiendas) {
                 const arrTiendas = Tiendas.split(',');
 
                 for (let tiendaID of arrTiendas) {
-                    await cds.run(INSERT.into(Duenos_Tiendas).columns('duenos_ID', 'tiendas_ID').values(duenoID, tiendaID));
+                    //await cds.run(INSERT.into(Duenos_Tiendas).columns('duenos_ID', 'tiendas_ID').values(duenoID, tiendaID));
+                    duenos_tiendas_ids.push({
+                        duenos_ID: duenoID,
+                        tiendas_ID: tiendaID
+                    });
                 }
 
+                await cds.run(INSERT.into(Duenos_Tiendas).entries(duenos_tiendas_ids));
                 console.log("Salió todo bien!");
             } else {
                 console.log("No se hallaron tiendas");
@@ -87,9 +94,9 @@ module.exports = cds.service.impl(async (srv) => {
         try {
             console.log("Antes de actualizar!");
             const { productoID, precio } = req.data
-            const arrProductos = await cds.run(SELECT.from(Productos).where({ ID: productoID }));
+            const producto = await cds.run(SELECT.one.from(Productos).where({ ID: productoID }));
 
-            if (arrProductos.length > 0) {
+            if (producto) {
                 await cds.run(UPDATE(Productos).with({ valor: precio }).where({ ID: productoID }));
                 return "Se actualizó el precio correctamente";
             } else {

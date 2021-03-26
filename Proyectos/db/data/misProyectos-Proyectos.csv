@@ -1,6 +1,6 @@
-ID;createdAt;createdBy;modifiedAt;modifiedBy;tecnologias;dificultad;cliente_ID
-20cf3913-0e5c-4a6a-bba9-8e3bb2103d70;2021-03-23T01:06:14.264Z;anonymous;2021-03-23T01:06:37.665Z;anonymous;["e5c72890-656d-45b6-8b4b-259b093b1c46", "e5c72890-656d-45b6-8b4b-259b093b1c47", "e5c72890-656d-45b6-8b4b-259b093b1c48"];3;9805ce7d-44bd-4ea1-8737-9ec889cab2ae
-20cf3913-0e5c-4a6a-bba9-8e3bb2103d71;2021-03-23T01:06:14.264Z;anonymous;2021-03-23T01:06:37.665Z;anonymous;["e5c72890-656d-45b6-8b4b-259b093b1c46", "e5c72890-656d-45b6-8b4b-259b093b1c47", "e5c72890-656d-45b6-8b4b-259b093b1c53", "e5c72890-656d-45b6-8b4b-259b093b1c51", "e5c72890-656d-45b6-8b4b-259b093b1c49"];5;9805ce7d-44bd-4ea1-8737-9ec889cab3ae
+createdAt;createdBy;modifiedAt;modifiedBy;ID;cliente_ID;tecnologias;dificultad
+2021-03-23T01:06:14.264Z;anonymous;2021-03-23T01:06:37.665Z;anonymous;200;100;[300,301];3
+2021-03-23T01:06:14.264Z;anonymous;2021-03-23T01:06:37.665Z;anonymous;201;101;[302,303,301];5
 
 
 

@@ -1,6 +1,7 @@
 using {miRedSocial as my} from '../db/schema';
 
-service api {
+@(path: '/GeneralService')
+service generalService @(_requires : 'Scope1') {
 
     entity Usuarios               as projection on my.Usuarios;
     entity Mensajes               as projection on my.Mensajes;

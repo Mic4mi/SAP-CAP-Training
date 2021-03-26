@@ -1,4 +1,4 @@
-nombre,apellido,paisDeOrigen,email_usuario,email_dominio,email_full,genero,telefono,fechaDeNacimiento,username,password,amigos,estado
-Jose, Perez,ARG,jperez, @gmail.com, jperez@gmail.com,2,0112845692,1982-12-31,Joseju77,asd123,500,false
-Pedro, Perez,ARG,pperez, @gmail.com, ppperez@gmail.com,2,0112123692,1990-12-31,ElPepe22,asdass98,200,true
-Maria Rosa, Gomez,URU,mrgomez, @gmail.com, mrgomez@gmail.com,2,0112841234,1991-12-31,Majolita,2013fff,600,true
+ID;nombre;apellido;paisDeOrigen;email_usuario;email_dominio;email_full;genero;telefono;fechaDeNacimiento;username;password;amigos;estado
+100;Jose;Perez;ARG;jperez;@gmail.com;jperez@gmail.com;2;0112845692;1982-12-31;Joseju77;asd123;500;false
+101;Pedro;Perez;ARG;pperez;@gmail.com;ppperez@gmail.com;2;0112123692;1990-12-31;ElPepe22;asdass98;200;true
+102;Maria Rosa;Gomez;URU;mrgomez;@gmail.com;mrgomez@gmail.com;2;0112841234;1991-12-31;Majolita;2013fff;600;true
