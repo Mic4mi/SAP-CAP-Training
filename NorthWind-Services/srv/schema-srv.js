@@ -18,8 +18,8 @@ module.exports = cds.service.impl(async (srv) => {
                 falta de stock, deberia poder borrarse la orden en sí, pero no estaria funcionando.*/
                 try {
                     let detalles = await cds.run(SELECT.from(Order_Details).where({ orden_ID: orden_ID }));
-                    if (detalles.length === 0) {
-                        await cds.run(DELETE.from(Ordenes).where({ ID: orden_ID })); // Esto no está andando. 
+                    if (detalles.length == 0) {
+                        await cds.run(DELETE.from('Ordenes').where({ ID: orden_ID })); // Esto no está andando. 
                     }
 
                 } catch (err) {

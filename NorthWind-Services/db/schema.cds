@@ -39,4 +39,3 @@ entity Order_Details : cuid {
     descuento      : Decimal;
 }
 
-//Primero cargar las entidades
