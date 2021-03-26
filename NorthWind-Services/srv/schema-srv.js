@@ -29,7 +29,7 @@ module.exports = cds.service.impl(async (srv) => {
 
                 throw new Error("No se ha podido generar la orden porque no hay stock suficiente.");
             } else {
-                console.log("Esta todo bien")
+                console.log("Se modificó el stock con exito.");
             }
 
         } else {
