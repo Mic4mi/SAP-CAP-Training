@@ -14,26 +14,29 @@ entity Productos {
 }
 
 entity Ordenes {
-    key ID                  : Integer;
-        fechaDeLaOrden      : DateTime;
-        fechaRequerida      : DateTime;
-        fechaDeEnvio        : DateTime;
-        codigoShipVia       : Integer;
-        transporte          : Decimal;
-        nombreDelTransporte : String(111);
-        direccionDeEnvio    : String(111);
-        ciudadDeEnvio       : String(111);
-        regionDeEnvio       : String(111);
-        codigoPortalDeEnvio : String(111);
-        paisDeEnvio         : String(111);
+    key ID                     : Integer;
+        fechaDeLaOrden         : DateTime;
+        fechaRequerida         : DateTime;
+        fechaDeEnvio           : DateTime;
+        codigoShipVia          : Integer;
+        transporte             : Decimal;
+        nombreDelTransporte    : String(111);
+        direccionDeEnvio       : String(111);
+        ciudadDeEnvio          : String(111);
+        regionDeEnvio          : String(111);
+        codigoPortalDeEnvio    : String(111);
+        paisDeEnvio            : String(111);
+        informacionAdicionalID : String(111);
+        /*detalles                : Association to many Order_Details
+                                     on detalles = $self;*/
 }
 
-entity Order_Details: cuid {
-    OrderID   : Integer;
-    ProductID : Integer;
-    UnitPrice : Decimal;
-    Quantity  : Integer;
-    Discount  : Integer;
+entity Order_Details : cuid {
+    orden          : Association to Ordenes;
+    producto       : Association to Productos;
+    precioUnitario : Decimal;
+    cantidad       : Integer;
+    descuento      : Decimal;
 }
 
 //Primero cargar las entidades

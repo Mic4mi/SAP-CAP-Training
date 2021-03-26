@@ -4,4 +4,5 @@ service api {
     entity Productos     as projection on my.Productos;
     entity Ordenes       as projection on my.Ordenes;
     entity Order_Details as projection on my.Order_Details;
+    action modificarStock(productoID : Productos : ID, stock : Productos : unidadesEnStock) returns String;
 }
