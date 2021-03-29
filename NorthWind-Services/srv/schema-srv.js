@@ -5,15 +5,18 @@ const axios = require('axios');
 
 module.exports = cds.service.impl(async (srv) => {
 
+    srv.on('DELETE', 'Productos', async (req) => {
+        req.reject(405, "Method not allowed");
+    });
+
     srv.before('CREATE', 'Order_Details', async (req) => {
         const { producto_ID, orden_ID, cantidad } = req.data;
-        const producto = await cds.run(SELECT.one.from(Productos).where({ ID: producto_ID }));
+        const producto = await cds.run(SELECT.one(Productos).where({ ID: producto_ID }));
         if (producto) {
-            producto.unidadesEnUnaOrden += cantidad;
-            producto.unidadesEnStock -= cantidad;
+            let unidadesEnUnaOrden = producto.unidadesEnUnaOrden += cantidad;
+            let unidadesEnStock = producto.unidadesEnStock -= cantidad;
 
-            if (producto.unidadesEnStock < 0) {
-
+            if (unidadesEnStock < 0) {
                 /* Si la Orden no tiene otras order_details, y no se puede generar una order_details por
                 falta de stock, deberia poder borrarse la orden en sí, pero no estaria funcionando.*/
                 try {
@@ -29,6 +32,7 @@ module.exports = cds.service.impl(async (srv) => {
 
                 throw new Error("No se ha podido generar la orden porque no hay stock suficiente.");
             } else {
+                await cds.run(UPDATE(Productos).set({unidadesEnStock : unidadesEnStock, unidadesEnUnaOrden: unidadesEnUnaOrden}).where({ID: producto_ID}));
                 console.log("Se modificó el stock con exito.");
             }
 

@@ -7,14 +7,33 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^4",
-    "axios": "^0.21.1",
+    "@sap/hana-client": "^2.6.61",
+    "@sap/xsenv": "^3.1.0",
+    "@sap/xssec": "^3.1.2",
     "express": "^4",
-    "https": "^1.0.0"
+    "mbt": "^1.1.1",
+    "axios": "^0.21.1",
+    "https": "^1.0.0",
+    "passport": "^0.4.1"
   },
   "devDependencies": {
     "sqlite3": "^5.0.2"
   },
   "scripts": {
     "start": "cds run"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "hana",
+        "model": [
+          "db",
+          "srv"
+        ]
+      }
+    },
+    "odata": {
+      "version": "v4"
+    }
   }
 }
