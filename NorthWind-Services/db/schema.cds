@@ -24,7 +24,7 @@ entity Ordenes {
         direccionDeEnvio       : String(111);
         ciudadDeEnvio          : String(111);
         regionDeEnvio          : String(111);
-        codigoPortalDeEnvio    : String(111);
+        codigoPostalDeEnvio    : String(111);
         paisDeEnvio            : String(111);
         informacionAdicionalID : String(111);
 }

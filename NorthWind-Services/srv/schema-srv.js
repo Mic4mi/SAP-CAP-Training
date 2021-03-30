@@ -41,4 +41,33 @@ module.exports = cds.service.impl(async (srv) => {
         }
 
     });
+
+
+    srv.on('calcVenta', async (req) => {
+        try {
+            console.log("Por procesar la venta")
+            const { orderDetailID } = req.data,
+                orderDetail = await cds.run(SELECT.one(Order_Details).where({ ID: orderDetailID })),
+                cantidad = orderDetail.cantidad,
+                precioUnitario = orderDetail.precioUnitario,
+                porcentajeDeDescuento = orderDetail.descuento;
+            let venta = cantidad * precioUnitario,
+                descuento = (venta * porcentajeDeDescuento) / 100,
+                ingresoTotal = venta - descuento,
+                resultadoObj = {
+                    precioPorUnidad: precioUnitario,
+                    cantidad: cantidad,
+                    porcentajeDeDescuento: porcentajeDeDescuento.toFixed(2),
+                    descuento: descuento.toFixed(2),
+                    total: venta.toFixed(2),
+                    totalFinal: ingresoTotal.toFixed(2)
+                }
+
+            return resultadoObj;
+        } catch (err) {
+            console.log(err);
+            return "Ha ocurrido un error."
+        }
+    });
+    
 });

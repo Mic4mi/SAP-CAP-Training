@@ -41,4 +41,15 @@ service generalService @(_requires : 'Scope1') {
         }
         order by
             producto asc;
+
+    type ingreso {
+        precioPorUnidad       : Decimal;
+        cantidad              : Integer;
+        porcentajeDeDescuento : Decimal(7, 2);
+        descuento             : Decimal(7, 2);
+        total                 : Decimal(7, 2);
+        totalFinal            : Decimal(7, 2);
+    }
+
+    action calcVenta(orderDetailID : Order_Details : ID) returns ingreso;
 }
