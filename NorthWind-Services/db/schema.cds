@@ -27,8 +27,6 @@ entity Ordenes {
         codigoPortalDeEnvio    : String(111);
         paisDeEnvio            : String(111);
         informacionAdicionalID : String(111);
-/*detalles                : Association to many Order_Details
-                             on detalles = $self;*/
 }
 
 entity Order_Details : cuid {
@@ -38,5 +36,3 @@ entity Order_Details : cuid {
     cantidad       : Integer;
     descuento      : Decimal;
 }
-
-

@@ -1,7 +1,7 @@
 const cds = require('@sap/cds');
 const axios = require('axios');
 
-cds.on('served', async () => {
+cds.once('served', async () => {
 
     const { Productos, Ordenes, Order_Details } = cds.entities;
 
@@ -64,7 +64,7 @@ cds.on('served', async () => {
                             direccionDeEnvio: orden.ShipAddress,
                             ciudadDeEnvio: orden.ShipCity,
                             regionDeEnvio: orden.ShipRegion,
-                            codigoPortalDeEnvio: orden.ShipPostalCode,
+                            codigoPostalDeEnvio: orden.ShipPostalCode,
                             paisDeEnvio: orden.ShipCountry,
                             informacionAdicionalID: orden.ShipRegion ? `${orden.ShipRegion}-${orden.OrderDate}` : orden.OrderDate
                         });
