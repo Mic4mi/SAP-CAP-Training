@@ -69,5 +69,38 @@ module.exports = cds.service.impl(async (srv) => {
             return "Ha ocurrido un error."
         }
     });
+
+    srv.on('buscarProductos', async (req) => {
+        try {
+            const { criterio } = req.data,
+                criterios = criterio.split(" ");
+            let producto,
+                productosFiltrados = [],
+                expresionLike = "";
+
+            for (let i = 0; i < criterios.length; i++) {
+                expresionLike += `nombre like '%${criterios[i]}%'`;
+
+                if (i < criterios.length - 1) {
+                    expresionLike += " or ";
+                }
+            }
+
+            const productos = await cds.run(SELECT.from(Productos).where(expresionLike));
+
+            for (producto of productos) {
+                productosFiltrados.push({
+                    ID: producto.ID,
+                    nombre: producto.nombre
+                });
+            }
+
+            return productosFiltrados;
+
+        } catch (err) {
+            console.log("Ha ocurrido un error");
+            console.log(err);
+        }
+    });
     
 });
